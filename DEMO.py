@@ -62,22 +62,44 @@ def run_demo(demo_file):
         return False
 
 def install_requirements(requirements_file):
-    """Install required packages for a specific demo using the --user flag"""
+    """Install required packages for a specific demo"""
     try:
         if os.path.exists(requirements_file):
             with st.spinner(f"Installing requirements from {requirements_file}..."):
-                # Use the --user flag to avoid permission issues
-                subprocess.check_call([
-                    sys.executable, "-m", "pip", "install", "--user", "-r", requirements_file
-                ])
-            st.success(f"Requirements installed successfully!")
-            return True
+                # Try to install with --user flag first
+                try:
+                    subprocess.check_call([
+                        sys.executable, "-m", "pip", "install", "--user", "-r", requirements_file
+                    ])
+                    st.success(f"Requirements installed successfully!")
+                    return True
+                except subprocess.CalledProcessError:
+                    # If that fails, show instructions for using a virtual environment
+                    st.error("""
+                    Permission error when installing packages. Please run this app in a virtual environment:
+                    
+                    ```
+                    # Create a virtual environment
+                    python -m venv myenv
+                    
+                    # Activate it
+                    source myenv/bin/activate  # On Linux/Mac
+                    # or
+                    myenv\\Scripts\\activate  # On Windows
+                    
+                    # Install Streamlit
+                    pip install streamlit
+                    
+                    # Run this app
+                    streamlit run demo_selector.py
+                    ```
+                    """)
+                    return False
         else:
             st.warning(f"Requirements file {requirements_file} not found.")
             return True  # Continue anyway
     except Exception as e:
         st.error(f"Failed to install requirements: {e}")
-        st.error("Try running this app with administrator privileges or in a virtual environment.")
         return False
 
 def main():
@@ -97,6 +119,10 @@ def main():
             with cols[i]:
                 st.subheader(demo["name"])
                 st.write(demo["description"])
+                
+                # Show option to install requirements separately
+                if st.button(f"Install Requirements", key=f"install_{i}"):
+                    install_requirements(demo["requirements"])
                 
                 if st.button(f"Run {demo['name']}", key=f"run_{i}"):
                     # Store the selected demo index
@@ -118,8 +144,10 @@ def main():
         
         st.title(f"🚀 {demo['name']}")
         
-        # Make sure requirements are installed
-        if install_requirements(demo["requirements"]):
+        # Option to bypass requirements installation
+        skip_requirements = st.checkbox("Skip requirements installation (if already installed)")
+        
+        if skip_requirements or install_requirements(demo["requirements"]):
             # Run the demo
             run_demo(demo["file_name"])
 
