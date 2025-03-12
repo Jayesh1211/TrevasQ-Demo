@@ -20,20 +20,20 @@ demos = [
     {
         "name": "Demo 1",
         "description": "First project demo",
-        "repo_url": "https://github.com/yourusername/project1",
-        "script_path": "path/to/your/demo1.py"  # Relative to this file
+        "repo_url": "https://github.com/Jayesh1211/QImage_Processing",
+        "script_path": "https://github.com/Jayesh1211/QImage_Processing/blob/main/WDEMO_.py"  # Relative to this file
     },
     {
         "name": "Demo 2",
         "description": "Second project demo",
-        "repo_url": "https://github.com/yourusername/project2",
-        "script_path": "path/to/your/demo2.py"
+        "repo_url": "https://github.com/Jayesh1211/GENOMIC",
+        "script_path": "https://github.com/Jayesh1211/GENOMIC/blob/main/xyz.py"
     },
     {
         "name": "Demo 3",
         "description": "Third project demo",
-        "repo_url": "https://github.com/yourusername/project3",
-        "script_path": "path/to/your/demo3.py"
+        "repo_url": "https://github.com/Jayesh1211/QRA",
+        "script_path": "https://github.com/Jayesh1211/QRA/blob/main/integrated-quantum-evaluator.py"
     }
 ]
 
