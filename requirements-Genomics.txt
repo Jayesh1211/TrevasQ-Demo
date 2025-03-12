@@ -1,0 +1,9 @@
+streamlit
+numpy
+scikit-learn
+genomic-benchmarks
+qiskit
+qiskit-machine-learning
+qiskit-algorithms
+torch
+matplotlib
