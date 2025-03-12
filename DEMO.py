@@ -16,21 +16,21 @@ st.set_page_config(
 demos = [
     {
         "name": "Demo 1",
-        "file_name": "demo1.py",
+        "file_name": "integrated-quantum-evaluator(1).py",
         "description": "Description of demo 1",
-        "requirements": "requirements_demo1.txt"
+        "requirements": "requirements-QRA.txt"
     },
     {
         "name": "Demo 2",
-        "file_name": "demo2.py",
+        "file_name": "WDEMO_(1).py",
         "description": "Description of demo 2",
-        "requirements": "requirements_demo2.txt"
+        "requirements": "requirements-QImage.txt"
     },
     {
         "name": "Demo 3",
-        "file_name": "demo3.py",
+        "file_name": "xyz.py",
         "description": "Description of demo 3",
-        "requirements": "requirements_demo3.txt"
+        "requirements": "requirements-Genomics.txt"
     }
 ]
 
