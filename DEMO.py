@@ -38,9 +38,6 @@ def run_demo(demo_file):
     """Run a selected demo file directly in the current Streamlit app"""
     try:
         with st.spinner(f"Loading {demo_file}..."):
-            # Clear the current app content
-            st.empty()
-            
             # Get the absolute path to the demo file
             demo_path = os.path.abspath(demo_file)
             
@@ -65,12 +62,13 @@ def run_demo(demo_file):
         return False
 
 def install_requirements(requirements_file):
-    """Install required packages for a specific demo"""
+    """Install required packages for a specific demo using the --user flag"""
     try:
         if os.path.exists(requirements_file):
             with st.spinner(f"Installing requirements from {requirements_file}..."):
+                # Use the --user flag to avoid permission issues
                 subprocess.check_call([
-                    sys.executable, "-m", "pip", "install", "-r", requirements_file
+                    sys.executable, "-m", "pip", "install", "--user", "-r", requirements_file
                 ])
             st.success(f"Requirements installed successfully!")
             return True
@@ -79,6 +77,7 @@ def install_requirements(requirements_file):
             return True  # Continue anyway
     except Exception as e:
         st.error(f"Failed to install requirements: {e}")
+        st.error("Try running this app with administrator privileges or in a virtual environment.")
         return False
 
 def main():
